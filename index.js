@@ -1,6 +1,7 @@
 var mysql = require("mysql");
 var inquirer = require("inquirer");
 var password = require("./password");
+//var table = require("console.table");
 
 // create the connection information for the sql database
 var connection = mysql.createConnection({
@@ -31,18 +32,31 @@ function start() {
       .prompt({
         name: "action",
         type: "list",
-        message: "What would you like to do ?",
+        message: "What would you like to do?",
         choices: ["View All Employees", "View All Employees by Department", "View All Employees by Manager", "Add Employee", "Remove Employee"]
       })
       .then(function(answer) {
         // based on their answer, either call the bid or the post functions
         if (answer.action === "View All Employees") {
-          promptEmployee();
+          listEmployees();
         }
-        else if(answer.postOrBid === "BID") {
-          bidAuction();
-        } else{
+        else if(answer.action === "View All Employees by Department") {
+          showEmployeeDepartment();
+        }
+        else if(answer.action === "View All Employees by Manager") {
+            showEmployeeManager();
+          }
+        else{
           connection.end();
         }
       });
-  }
+  
+
+function listEmployees() {
+    connection.query("SELECT * FROM employee", function(err, results) {
+      if (err) throw err;
+      console.table(results)
+      })
+      }   
+}
+

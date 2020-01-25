@@ -29,10 +29,10 @@ connection.connect(function(err) {
 function start() {
     inquirer
       .prompt({
-        name: "postOrBid",
+        name: "Action",
         type: "list",
-        message: "Would you like to [POST] an auction or [BID] on an auction?",
-        choices: ["POST", "BID", "EXIT"]
+        message: "What would you like to do ?",
+        choices: ["View All Employees", "View All Employees by Department", "View All Employees by Manager", "Add Emloyee", "Remove Employee"]
       })
       .then(function(answer) {
         // based on their answer, either call the bid or the post functions

@@ -29,15 +29,15 @@ connection.connect(function(err) {
 function start() {
     inquirer
       .prompt({
-        name: "Action",
+        name: "action",
         type: "list",
         message: "What would you like to do ?",
-        choices: ["View All Employees", "View All Employees by Department", "View All Employees by Manager", "Add Emloyee", "Remove Employee"]
+        choices: ["View All Employees", "View All Employees by Department", "View All Employees by Manager", "Add Employee", "Remove Employee"]
       })
       .then(function(answer) {
         // based on their answer, either call the bid or the post functions
-        if (answer.postOrBid === "POST") {
-          postAuction();
+        if (answer.action === "View All Employees") {
+          promptEmployee();
         }
         else if(answer.postOrBid === "BID") {
           bidAuction();

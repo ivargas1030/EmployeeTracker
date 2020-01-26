@@ -43,13 +43,13 @@ INSERT INTO department (name) values ('Central Office');
 INSERT INTO department (name) values ('Customer Service');
 INSERT INTO department (name) values ('Information Technology');
 
-SELECT * FROM employee;
-SELECT * FROM department;
-
+SELECT employee.role_id, role.title
+FROM (employee
+INNER JOIN role ON employee.role_id = role.title)
 /*SELECT first_name, last_name
 FROM employee
 INNER JOIN department ON employee.department = department.id
-
+*/
 
 
 

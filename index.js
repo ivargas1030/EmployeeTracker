@@ -1,6 +1,7 @@
 var mysql = require("mysql");
 var inquirer = require("inquirer");
 var password = require("./password");
+var figlet = require("figlet");
 //var table = require("console.table");
 
 // create the connection information for the sql database
@@ -26,6 +27,16 @@ connection.connect(function(err) {
   console.log("Connected to the database")
 });
 
+// Cool text at the beginning
+figlet.text('Employee Tracker', function(err, data) {
+  if (err) {
+      console.log('Something went wrong...');
+      console.dir(err);
+      return;
+  }
+  console.log(data)
+});
+
 // function which prompts the user for what action they should take
 function start() {
     inquirer
@@ -33,7 +44,7 @@ function start() {
         name: "action",
         type: "list",
         message: "What would you like to do?",
-        choices: ["View All Employees", "View All Employees by Department", "View All Employees by Manager", "Add Employee", "Remove Employee", "Exit"]
+        choices: ["View All Employees", "View All Employees by Department", "View All Employee Roles", "Add Employee", "Remove Employee", "Exit"]
       })
       .then(function(answer) {
         switch (answer.action) {
@@ -45,8 +56,8 @@ function start() {
           showEmployeeDepartment();
           break;
   
-        case "View All Employees by Manager":
-          showEmployeeManager();
+        case "View All Employee Roles":
+          showEmployeeRole();
           break;
   
         case "Add Employee":
@@ -77,8 +88,8 @@ function showEmployeeDepartment() {
         start();
         })};
 
-function showEmployeeManager() {
-    connection.query("SELECT manager_id FROM employee", function(err, results) {
+function showEmployeeRole() {
+    connection.query("SELECT * FROM company.role", function(err, results) {
         if (err) throw err;
         console.table(results);
         start();

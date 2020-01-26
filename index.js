@@ -54,7 +54,7 @@ function start() {
           break;
 
         case "Remove Employee":
-          addEmployee();
+          removeEmployee();
           break;
   
         case "exit":
@@ -76,5 +76,74 @@ function showEmployeeDepartment() {
         console.table(results);
         start();
         })};
+
+function showEmployeeManager() {
+    connection.query("SELECT manager_id FROM employee", function(err, results) {
+        if (err) throw err;
+        console.table(results);
+        start();
+        })};
+
+// function to add a new employee record
+function addEmployee() {
+    // prompt for employee name
+    inquirer
+      .prompt([
+        {
+          name: "first",
+          type: "input",
+          message: "Enter a first name"
+        },
+        {
+          name: "last",
+          type: "input",
+          message: "Enter a last name"
+        },
         
+      ])
+      .then(function(answer) {
+        // when finished prompting, insert a new item into the db with that info
+        connection.query(
+          "INSERT INTO employee SET ?",
+          {
+            first_name: answer.first,
+            last_name: answer.last,
+          },
+          function(err) {
+            if (err) throw err;
+            console.log("Your employee was added successfully!");
+            // re-prompt the user
+            start();
+          }
+        );
+      });
+    }
+
+// function to remove an employee record
+function removeEmployee() {
+    // prompt for employee name
+    inquirer
+      .prompt([
+        {
+          name: "id",
+          type: "input",
+          message: "Enter employee ID"
+        },
+      ])
+      .then(function(answer) {
+        // when finished prompting, insert a new item into the db with that info
+        connection.query(
+          "DELETE FROM employee WHERE id = ? LIMIT 1",
+          {
+            id: answer.id,
+          },
+          function(err) {
+            if (err) throw err;
+            console.log("Your employee was deleted successfully!");
+            // re-prompt the user
+            start();
+          }
+        );
+      });
+    }
 }

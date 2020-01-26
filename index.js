@@ -1,6 +1,6 @@
 var mysql = require("mysql");
 var inquirer = require("inquirer");
-var password = require("./password");
+var password = require("../../password");
 var figlet = require("figlet");
 //var table = require("console.table");
 

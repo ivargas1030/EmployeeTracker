@@ -6,6 +6,6 @@ The employee tracker is command line application that allows a user to look up, 
 
 ![Database Load Page](images/EmployeeTracker.JPG)
 
-The user can scroll through the options to bring up the specific data they would like to see. They can also add and remove employee records from the database. The overall application is pretty basic at the moment with hopeful improvements to come at a future date.
+The user can scroll through the options to bring up the specific data they would like to see. They can also add and remove employee records from the database. The overall application is pretty basic and the moment with hopeful improvements to come at a future date.
 
 

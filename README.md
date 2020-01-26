@@ -4,6 +4,6 @@
 
 The employee tracker is command line application that allows a user to look up, add, and edit employee information. The tools used to create this project are node, inquirer, and mySQL.
 
-![Database Load Page](images/EmployeeTracker.jpg)
+![Database Load Page](images/EmployeeTracker.JPG)
 
 THe overall application is pretty basic and the moment with hopeful improvements to come at a future date.

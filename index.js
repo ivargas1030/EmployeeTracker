@@ -33,30 +33,48 @@ function start() {
         name: "action",
         type: "list",
         message: "What would you like to do?",
-        choices: ["View All Employees", "View All Employees by Department", "View All Employees by Manager", "Add Employee", "Remove Employee"]
+        choices: ["View All Employees", "View All Employees by Department", "View All Employees by Manager", "Add Employee", "Remove Employee", "Exit"]
       })
       .then(function(answer) {
-        // based on their answer, either call the bid or the post functions
-        if (answer.action === "View All Employees") {
+        switch (answer.action) {
+        case "View All Employees":
           listEmployees();
-        }
-        else if(answer.action === "View All Employees by Department") {
-          showEmployeeDepartment();
-        }
-        else if(answer.action === "View All Employees by Manager") {
-            showEmployeeManager();
-          }
-        else{
-          connection.end();
-        }
-      });
+          break;
   
+        case "View All Employees by Department":
+          showEmployeeDepartment();
+          break;
+  
+        case "View All Employees by Manager":
+          showEmployeeManager();
+          break;
+  
+        case "Add Employee":
+          addEmployee();
+          break;
 
+        case "Remove Employee":
+          addEmployee();
+          break;
+  
+        case "exit":
+          connection.end();
+          break;
+        }
+    });
+ 
 function listEmployees() {
     connection.query("SELECT * FROM employee", function(err, results) {
       if (err) throw err;
-      console.table(results)
-      })
-      }   
-}
+      console.table(results);
+      start();
+      })};
 
+function showEmployeeDepartment() {
+    connection.query("SELECT * FROM department", function(err, results) {
+        if (err) throw err;
+        console.table(results);
+        start();
+        })};
+        
+}
